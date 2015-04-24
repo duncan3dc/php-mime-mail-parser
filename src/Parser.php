@@ -5,10 +5,7 @@ namespace PhpMimeMailParser;
 use PhpMimeMailParser\Contracts\CharsetManager;
 
 /**
- * Parser of php-mime-mail-parser
- *
- * Fully Tested Mailparse Extension Wrapper for PHP 5.4+
- *
+ * Parser of php-mime-mail-parser.
  */
 class Parser
 {
@@ -22,33 +19,27 @@ class Parser
     /**
      * PHP MimeParser Resource ID
      *
-     * @var resource $resource
+     * @var resource $resource PHP MimeParser Resource ID.
      */
     protected $resource;
 
     /**
-     * A file pointer to email
-     *
-     * @var resource $stream
+     * @var resource $stream A file pointer to email.
      */
     protected $stream;
 
     /**
-     * A text of an email
-     *
-     * @var string $data
+     * @var string $data A text of an email.
      */
     protected $data;
 
     /**
-     * Parts of an email
-     *
-     * @var array $parts
+     * @var array $parts Parts of an email.
      */
     protected $parts;
 
     /**
-     * @var CharsetManager object
+     * @var CharsetManager $charset Charset manager object.
      */
     protected $charset;
 
@@ -77,7 +68,7 @@ class Parser
     }
 
     /**
-     * Free the held resources
+     * Free the held resources.
      *
      * @return void
      */
@@ -94,11 +85,11 @@ class Parser
     }
 
     /**
-     * Set the file path we use to get the email text
+     * Set the file path we use to get the email text.
      *
      * @param string $path File path to the MIME mail
      *
-     * @return Parser MimeMailParser Instance
+     * @return $this
      */
     public function setPath($path)
     {
@@ -111,12 +102,13 @@ class Parser
     }
 
     /**
-     * Set the Stream resource we use to get the email text
+     * Set the Stream resource we use to get the email text.
      *
      * @param resource $stream
      *
-     * @return Parser MimeMailParser Instance
      * @throws Exception
+     *
+     * @return $this
      */
     public function setStream($stream)
     {
@@ -154,11 +146,11 @@ class Parser
     }
 
     /**
-     * Set the email text
+     * Set the email text.
      *
      * @param string $data
      *
-     * @return Parser MimeMailParser Instance
+     * @return $this
      */
     public function setText($data)
     {
@@ -175,7 +167,7 @@ class Parser
     }
 
     /**
-     * Parse the Message into parts
+     * Parse the Message into parts.
      *
      * @return void
      */
@@ -194,8 +186,9 @@ class Parser
      *
      * @param string $name Header name (case-insensitive)
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function getRawHeader($name)
     {
@@ -212,7 +205,7 @@ class Parser
     }
 
     /**
-     * Retrieve a specific Email Header
+     * Retrieve a specific Email Header.
      *
      * @param string $name Header name (case-insensitive)
      *
@@ -229,10 +222,11 @@ class Parser
     }
 
     /**
-     * Retrieve all mail headers
+     * Retrieve all mail headers.
+     *
+     * @throws Exception
      *
      * @return array
-     * @throws Exception
      */
     public function getHeaders()
     {
@@ -274,11 +268,13 @@ class Parser
     }
 
     /**
-     * Retrieve the raw Header of a MIME part
+     * Retrieve the raw Header of a MIME part.
      *
-     * @return String
      * @param $part Object
+     *
      * @throws Exception
+     *
+     * @return string
      */
     protected function getPartHeader(&$part)
     {
@@ -292,10 +288,11 @@ class Parser
     }
 
     /**
-     * Retrieve the Header from a MIME part from file
+     * Retrieve the Header from a MIME part from file.
+     *
+     * @param $part array
      *
      * @return String Mime Header Part
-     * @param $part Array
      */
     protected function getPartHeaderFromFile(&$part)
     {
@@ -307,10 +304,11 @@ class Parser
     }
 
     /**
-     * Retrieve the Header from a MIME part from text
+     * Retrieve the Header from a MIME part from text.
+     *
+     * @param $part array
      *
      * @return String Mime Header Part
-     * @param $part Array
      */
     protected function getPartHeaderFromText(&$part)
     {
@@ -326,6 +324,7 @@ class Parser
      *
      * @param string $partId
      * @param string $parentPartId
+     *
      * @return bool
      */
     protected function partIdIsChildOfPart($partId, $parentPartId)
@@ -338,6 +337,7 @@ class Parser
      * Whether the given part ID is a child of any attachment part in the message.
      *
      * @param string $checkPartId
+     *
      * @return bool
      */
     protected function partIdIsChildOfAnAttachment($checkPartId)
@@ -353,12 +353,13 @@ class Parser
     }
 
     /**
-     * Returns the email message body in the specified format
+     * Returns the email message body in the specified format.
      *
-     * @param string $type text, html or htmlEmbedded
+     * @param string $type Text or html or htmlEmbedded
      *
-     * @return string Body
      * @throws Exception
+     *
+     * @return string|false Body or false if not found
      */
     public function getMessageBody($type = 'text')
     {
@@ -395,7 +396,7 @@ class Parser
     }
 
     /**
-     * Returns the embedded data structure
+     * Returns the embedded data structure.
      *
      * @param string $contentId Content-Id
      *
@@ -470,7 +471,7 @@ class Parser
     }
 
     /**
-     * Returns the attachments contents in order of appearance
+     * Returns the attachments contents in order of appearance.
      *
      * @return Attachment[]
      */
@@ -532,14 +533,15 @@ class Parser
     }
 
     /**
-     * Save attachments in a folder
+     * Save attachments in a folder.
      *
      * @param string $attach_dir directory
      * @param bool $include_inline
      * @param string $filenameStrategy How to generate attachment filenames
      *
-     * @return array Saved attachments paths
      * @throws Exception
+     *
+     * @return array Saved attachments paths
      */
     public function saveAttachments(
         $attach_dir,
@@ -597,12 +599,13 @@ class Parser
     }
 
     /**
-     * Read the attachment Body and save temporary file resource
+     * Read the attachment Body and save temporary file resource.
      *
      * @param array $part
      *
-     * @return resource Mime Body Part
      * @throws Exception
+     *
+     * @return resource Mime Body Part
      */
     protected function getAttachmentStream(&$part)
     {
@@ -641,10 +644,10 @@ class Parser
     }
 
     /**
-     * Decode the string from Content-Transfer-Encoding
+     * Decode the string from Content-Transfer-Encoding.
      *
      * @param string $encodedString The string in its original encoded state
-     * @param string $encodingType  The encoding type from the Content-Transfer-Encoding header of the part.
+     * @param string $encodingType  The encoding type from the Content-Transfer-Encoding header of the part
      *
      * @return string The decoded string
      */
@@ -661,7 +664,7 @@ class Parser
     }
 
     /**
-     * $input can be a string or array
+     * $input can be a string or array.
      *
      * @param string|array $input
      *
@@ -716,7 +719,7 @@ class Parser
     }
 
     /**
-     * Return the charset of the MIME part
+     * Return the charset of the MIME part.
      *
      * @param array $part
      *
@@ -732,10 +735,11 @@ class Parser
     }
 
     /**
-     * Retrieve a specified MIME part
+     * Retrieve a specified MIME part.
      *
      * @param string $type
      * @param array  $parts
+     *
      *
      * @return string|array
      */
@@ -744,8 +748,9 @@ class Parser
         return (isset($parts[$type])) ? $parts[$type] : false;
     }
 
+
     /**
-     * Retrieve the Body of a MIME part
+     * Retrieve the Body of a MIME part.
      *
      * @param array $part
      *
@@ -764,7 +769,7 @@ class Parser
     }
 
     /**
-     * Retrieve the Body from a MIME part from file
+     * Retrieve the Body from a MIME part from file.
      *
      * @param array $part
      *
@@ -784,7 +789,7 @@ class Parser
     }
 
     /**
-     * Retrieve the Body from a MIME part from text
+     * Retrieve the Body from a MIME part from text.
      *
      * @param array $part
      *

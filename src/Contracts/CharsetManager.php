@@ -4,7 +4,7 @@ interface CharsetManager
 {
 
     /**
-     * Decode the string from Charset
+     * Decode the string from Charset.
      *
      * @param string $encodedString The string in its original encoded state
      * @param string $charset       The Charset header of the part.
@@ -14,9 +14,9 @@ interface CharsetManager
     public function decodeCharset($encodedString, $charset);
 
     /**
-     * Get charset alias
+     * Get charset alias.
      *
-     * @param string $charset .
+     * @param string $charset
      *
      * @return string The charset alias
      */

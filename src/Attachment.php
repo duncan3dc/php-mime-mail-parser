@@ -3,40 +3,37 @@
 namespace PhpMimeMailParser;
 
 /**
- * Attachment of php-mime-mail-parser
- *
- * Fully Tested Mailparse Extension Wrapper for PHP 5.4+
- *
+ * Attachment of php-mime-mail-parser.
  */
 class Attachment
 {
     /**
-     * @var string $filename Filename
+     * @var string $filename Filename.
      */
     protected $filename;
 
     /**
-     * @var string $contentType Mime Type
+     * @var string $contentType Mime Type.
      */
     protected $contentType;
 
     /**
-     * @var string $content File Content
+     * @var string $content File Content.
      */
     protected $content;
 
     /**
-     * @var string $contentDisposition Content-Disposition (attachment or inline)
+     * @var string $contentDisposition Content-Disposition (attachment or inline).
      */
     protected $contentDisposition;
 
     /**
-     * @var string $contentId Content-ID
+     * @var string $contentId Content-ID.
      */
     protected $contentId;
 
     /**
-     * @var array $headers An Array of the attachment headers
+     * @var array $headers An Array of the attachment headers.
      */
     protected $headers;
 
@@ -81,7 +78,7 @@ class Attachment
     }
 
     /**
-     * retrieve the attachment filename
+     * Retrieve the attachment filename.
      *
      * @return string
      */
@@ -91,7 +88,7 @@ class Attachment
     }
 
     /**
-     * Retrieve the Attachment Content-Type
+     * Retrieve the Attachment Content-Type.
      *
      * @return string
      */
@@ -101,7 +98,7 @@ class Attachment
     }
 
     /**
-     * Retrieve the Attachment Content-Disposition
+     * Retrieve the Attachment Content-Disposition.
      *
      * @return string
      */
@@ -111,7 +108,7 @@ class Attachment
     }
 
     /**
-     * Retrieve the Attachment Content-ID
+     * Retrieve the Attachment Content-ID.
      *
      * @return string
      */
@@ -121,7 +118,7 @@ class Attachment
     }
 
     /**
-     * Retrieve the Attachment Headers
+     * Retrieve the Attachment Headers.
      *
      * @return array
      */
@@ -131,7 +128,7 @@ class Attachment
     }
 
     /**
-     * Get a handle to the stream
+     * Get a handle to the stream.
      *
      * @return stream
      */
@@ -141,8 +138,9 @@ class Attachment
     }
 
     /**
-     * Read the contents a few bytes at a time until completed
-     * Once read to completion, it always returns false
+     * Read the contents a few bytes at a time until completed.
+     *
+     * Once read to completion, it always returns false.
      *
      * @param int $bytes (default: 2082)
      *
@@ -154,7 +152,8 @@ class Attachment
     }
 
     /**
-     * Retrieve the file content in one go
+     * Retrieve the file content in one go.
+     *
      * Once you retrieve the content you cannot use MimeMailParser_attachment::read()
      *
      * @return string
@@ -172,7 +171,7 @@ class Attachment
     }
 
     /**
-     * Get mime part string for this attachment
+     * Get mime part string for this attachment.
      *
      * @return string
      */
