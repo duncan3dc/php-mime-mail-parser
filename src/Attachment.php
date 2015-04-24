@@ -58,15 +58,8 @@ class Attachment
      * @param array    $headers
      * @param string   $mimePartStr
      */
-    public function __construct(
-        $filename,
-        $contentType,
-        $stream,
-        $contentDisposition = 'attachment',
-        $contentId = '',
-        $headers = [],
-        $mimePartStr = ''
-    ) {
+    public function __construct($filename, $contentType, $stream, $contentDisposition = 'attachment', $contentId = '', $headers = [], $mimePartStr = '')
+    {
         $this->filename = $filename;
         $this->contentType = $contentType;
         $this->stream = $stream;

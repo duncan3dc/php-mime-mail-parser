@@ -1,4 +1,6 @@
-<?php namespace PhpMimeMailParser;
+<?php
+
+namespace PhpMimeMailParser;
 
 use PhpMimeMailParser\Contracts\CharsetManager;
 

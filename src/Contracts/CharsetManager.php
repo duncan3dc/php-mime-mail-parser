@@ -1,4 +1,6 @@
-<?php namespace PhpMimeMailParser\Contracts;
+<?php
+
+namespace PhpMimeMailParser\Contracts;
 
 interface CharsetManager
 {

@@ -364,9 +364,9 @@ class Parser
     public function getMessageBody($type = 'text')
     {
         $mime_types = [
-            'text'         => 'text/plain',
-            'html'         => 'text/html',
-            'htmlEmbedded' => 'text/html',
+            'text'          =>  'text/plain',
+            'html'          =>  'text/html',
+            'htmlEmbedded'  =>  'text/html',
         ];
 
         if (in_array($type, array_keys($mime_types))) {
@@ -383,11 +383,7 @@ class Parser
             $attachments = $this->getAttachments();
             foreach ($attachments as $attachment) {
                 if ($attachment->getContentID() != '') {
-                    $body = str_replace(
-                        '"cid:'.$attachment->getContentID().'"',
-                        '"'.$this->getEmbeddedData($attachment->getContentID()).'"',
-                        $body
-                    );
+                    $body = str_replace('"cid:' . $attachment->getContentID() . '"', '"' . $this->getEmbeddedData($attachment->getContentID()) . '"', $body);
                 }
             }
         }
@@ -408,8 +404,8 @@ class Parser
             if ($this->getPart('content-id', $part) == $contentId) {
                 $embeddedData = 'data:';
                 $embeddedData .= $this->getPart('content-type', $part);
-                $embeddedData .= ';'.$this->getPart('transfer-encoding', $part);
-                $embeddedData .= ','.$this->getPartBody($part);
+                $embeddedData .= ';' . $this->getPart('transfer-encoding', $part);
+                $embeddedData .= ',' . $this->getPartBody($part);
                 return $embeddedData;
             }
         }
@@ -457,8 +453,7 @@ class Parser
                 && !$this->partIdIsChildOfAnAttachment($partId)
             ) {
                 $headers = $this->getPart('headers', $part);
-                $encodingType = array_key_exists('content-transfer-encoding', $headers) ?
-                    $headers['content-transfer-encoding'] : '';
+                $encodingType = array_key_exists('content-transfer-encoding', $headers) ? $headers['content-transfer-encoding'] : '';
                 if (is_array($encodingType)) {
                     $encodingType = $encodingType[0];
                 }
@@ -497,8 +492,7 @@ class Parser
                 // Escape all potentially unsafe characters from the filename
                 $filename = preg_replace('((^\.)|\/|(\.$))', '_', $filename);
                 $disposition = 'attachment';
-            } elseif (in_array($part['content-type'], $non_attachment_types, true)
-                && $disposition !== 'attachment') {
+            } elseif (in_array($part['content-type'], $non_attachment_types, true) && $disposition !== 'attachment') {
                 // it is a message body, no attachment
                 continue;
             } elseif (substr($part['content-type'], 0, 10) !== 'multipart/') {
@@ -509,7 +503,7 @@ class Parser
             if (in_array($disposition, $dispositions) === true) {
                 if ($filename == 'noname') {
                     $nonameIter++;
-                    $filename = 'noname'.$nonameIter;
+                    $filename = 'noname' . $nonameIter;
                 }
 
                 $headersAttachments = $this->getPart('headers', $part);
@@ -613,8 +607,7 @@ class Parser
         $temp_fp = tmpfile();
 
         $headers = $this->getPart('headers', $part);
-        $encodingType = array_key_exists('content-transfer-encoding', $headers) ?
-            $headers['content-transfer-encoding'] : '';
+        $encodingType = array_key_exists('content-transfer-encoding', $headers) ? $headers['content-transfer-encoding'] : '';
 
         if ($temp_fp) {
             if ($this->stream) {
@@ -706,7 +699,7 @@ class Parser
                     $text = str_replace('_', ' ', $text);
                     preg_match_all('/=([a-f0-9]{2})/i', $text, $matches);
                     foreach ($matches[1] as $value) {
-                        $text = str_replace('='.$value, chr(hexdec($value)), $text);
+                        $text = str_replace('=' . $value, chr(hexdec($value)), $text);
                     }
                     break;
             }
